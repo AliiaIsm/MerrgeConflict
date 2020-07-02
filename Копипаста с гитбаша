@@ -1,0 +1,78 @@
+DiA@DiA-Comp MINGW64 ~
+$ cd c:/Users/DiA/Desktop
+
+DiA@DiA-Comp MINGW64 ~/Desktop (master)
+$ mkdir MERGETEST
+
+DiA@DiA-Comp MINGW64 ~/Desktop (master)
+$ cd MERGETEST
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git init
+Initialized empty Git repository in C:/Users/DiA/Desktop/MERGETEST/.git/
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ echo "this is some content to mess with" > merge.txt
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git add merge.txt
+warning: LF will be replaced by CRLF in merge.txt.
+The file will have its original line endings in your working directory
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git commit -am"we are commiting the inital content"
+[master (root-commit) e56154b] we are commiting the inital content
+ 1 file changed, 1 insertion(+)
+ create mode 100644 merge.txt
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git checkout -b NewBtoMergeLater
+Switched to a new branch 'NewBtoMergeLater'
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (NewBtoMergeLater)
+$ git status
+On branch NewBtoMergeLater
+nothing to commit, working tree clean
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (NewBtoMergeLater)
+$ echo "totally different content to merge later" > merge.txt
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (NewBtoMergeLater)
+$ git commit -am"edited the content of merge.txt to cause a conflict"
+warning: LF will be replaced by CRLF in merge.txt.
+The file will have its original line endings in your working directory
+[NewBtoMergeLater 47582e6] edited the content of merge.txt to cause a conflict
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (NewBtoMergeLater)
+$ git checkout master
+Switched to branch 'master'
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ echo "content to append" >> merge.txt
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   merge.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git commit -am"appended content to merge.txt"
+warning: LF will be replaced by CRLF in merge.txt.
+The file will have its original line endings in your working directory
+[master 477c805] appended content to merge.txt
+ 1 file changed, 1 insertion(+)
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master)
+$ git merge NewBtoMergeLater
+Auto-merging merge.txt
+CONFLICT (content): Merge conflict in merge.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+DiA@DiA-Comp MINGW64 ~/Desktop/MERGETEST (master|MERGING)
+$
